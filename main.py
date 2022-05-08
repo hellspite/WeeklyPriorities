@@ -1,6 +1,6 @@
 import deco
+import write_orders
 
 if __name__ == "__main__":
     orders = deco.get_weekly_priorities()
-    for order in orders:
-        print(f"- Order: {order['order_id']}")
+    write_orders.dump_orders(orders)
