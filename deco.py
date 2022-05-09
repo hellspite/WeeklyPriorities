@@ -1,8 +1,6 @@
-import datetime
-
 import requests
 import os
-from datetime import date, timedelta
+from datetime import datetime, date, timedelta
 
 USERNAME = os.environ["DECO_USER"]
 PASSWORD = os.environ["DECO_PASS"]
@@ -38,15 +36,9 @@ def get_weekly_priorities():
 
 def get_days():
     """Return the starting end ending days of the current week"""
-    today = datetime.datetime.today()
-    weekday = today.weekday()
+    first_day = datetime.today()
 
-    if weekday != 0:
-        first_day = date(today.year, today.month, today.day - weekday)
-    else:
-        first_day = today
-
-    last_day = first_day + timedelta(days=6)
+    last_day = first_day + timedelta(7)
 
     return first_day, last_day
 
@@ -56,7 +48,7 @@ def get_priorities(json_response):
     priorities = []
 
     for order in json_response["orders"]:
-        if order["is_priority"]:
+        if order["is_priority"] and order["order_status"] != 7 and order["order_status"] != 4:
             priorities.append(order)
 
     return priorities
