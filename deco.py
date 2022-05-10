@@ -43,6 +43,19 @@ def get_days():
     return first_day, last_day
 
 
+def get_week_days():
+    first_day, last_day = get_days()
+
+    week_days = []
+    day = date(first_day.year, first_day.month, first_day.day)
+
+    for i in range(8):
+        week_days.append(day)
+        day = day + timedelta(1)
+
+    return week_days
+
+
 def get_priorities(json_response):
     """"""
     priorities = []
