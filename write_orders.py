@@ -34,25 +34,25 @@ def format_day(order):
     return order_date
 
 
-def dump_orders(orders):
-    days_orders = link_days_orders(orders)
+def dump_orders(workingdays):
 
     with open(FILE_PATH, "w") as f:
-        for day in days_orders:
-            f.write(f"{days_name[day['day'].weekday()]}\n")
-            f.write("----------------\n")
-            for order in day['orders']:
-                billing_details = order["billing_details"]
-                if billing_details["company"] != "":
-                    customer_name = billing_details["company"]
-                else:
-                    customer_name = f"{billing_details['firstname']} {billing_details['lastname']}"
+        for day in workingdays:
+            if day.has_orders():
+                f.write(day.get_day())
+                f.write("----------------\n")
+                for order in day.get_orders():
+                    billing_details = order["billing_details"]
+                    if billing_details["company"] != "":
+                        customer_name = billing_details["company"]
+                    else:
+                        customer_name = f"{billing_details['firstname']} {billing_details['lastname']}"
 
-                if order["job_name"] == "":
-                    job_name = customer_name
-                else:
-                    job_name = order["job_name"]
+                    if order["job_name"] == "":
+                        job_name = customer_name
+                    else:
+                        job_name = order["job_name"]
 
-                item_name = f"{order['order_id']} - {customer_name} - {job_name}"
-                f.write(f"Ordine {item_name}\n")
-            f.write("\n\n")
+                    item_name = f"{order['order_id']} - {customer_name} - {job_name}"
+                    f.write(f"Ordine {item_name}\n")
+                f.write("\n\n")

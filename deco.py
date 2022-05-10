@@ -7,6 +7,26 @@ PASSWORD = os.environ["DECO_PASS"]
 API_URL = "https://straighttohell.eu/api/json/manage_orders/find"
 
 
+def get_daily_priorities(day):
+    day_start_formatted = day.strftime("%Y-%m-%dT00:00:00")
+    day_end_formatted = day.strftime("%Y-%m-%dT23:59:59")
+
+    params = {
+        "field": "5",
+        "condition": "7",
+        "date1": day_start_formatted,
+        "date2": day_end_formatted,
+        "sortby": 1,
+        "username": USERNAME,
+        "password": PASSWORD
+    }
+
+    response = requests.get(API_URL, params=params)
+    priorities = get_priorities(response.json())
+
+    return priorities
+
+
 def get_weekly_priorities():
     """Return a list of priorities for the current week
 
