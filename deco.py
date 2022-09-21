@@ -81,7 +81,8 @@ def get_priorities(json_response):
     priorities = []
 
     for order in json_response["orders"]:
-        if order["is_priority"] and order["order_status"] != 7 and order["order_status"] != 4:
+        if order["is_priority"] and order["order_status"] != 7 and order["order_status"] != 4\
+                and order["order_status"] != 2 and order["order_status"] != 3:
             priorities.append(order)
 
     return priorities
