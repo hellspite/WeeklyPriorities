@@ -58,7 +58,7 @@ def get_days():
     """Return the starting end ending days of the current week"""
     first_day = datetime.today()
 
-    last_day = first_day + timedelta(7)
+    last_day = first_day + timedelta(35)
 
     return first_day, last_day
 
@@ -69,7 +69,7 @@ def get_week_days():
     week_days = []
     day = date(first_day.year, first_day.month, first_day.day)
 
-    for i in range(8):
+    for i in range(36):
         week_days.append(day)
         day = day + timedelta(1)
 
