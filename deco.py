@@ -9,10 +9,10 @@ API_URL = "https://straighttohell.eu/api/json/manage_orders/find"
 
 def get_daily_priorities(day):
     day_start_formatted = day.strftime("%Y-%m-%dT08:00:00")
-    # day_end_formatted = day.strftime("%Y-%m-%dT23:59:59")
+    day_end_formatted = day.strftime("%Y-%m-%dT23:59:59")
     # Compensate the different timezone during the search
-    day_end = day + timedelta(days=1)
-    day_end_formatted = day_end.strftime("%Y-%m-%dT08:59:59")
+    # day_end = day + timedelta(days=1)
+    # day_end_formatted = day_end.strftime("%Y-%m-%dT08:59:59")
 
     params = {
         "field": "5",
