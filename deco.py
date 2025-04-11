@@ -1,9 +1,11 @@
+from dotenv import load_dotenv
 import requests
 import os
 from datetime import datetime, date, timedelta, timezone
 
-USERNAME = os.environ["DECO_USER"]
-PASSWORD = os.environ["DECO_PASS"]
+load_dotenv()
+USERNAME = os.getenv("DECO_USER")
+PASSWORD = os.getenv("DECO_PASS")
 API_URL = "https://straighttohell.eu/api/json/manage_orders/find"
 
 
